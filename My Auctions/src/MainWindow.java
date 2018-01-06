@@ -84,7 +84,7 @@ public class MainWindow {
 	private void initialize() {
 		frmMainWindow = new JFrame();
 		frmMainWindow.setTitle("Main Window");
-		frmMainWindow.setBounds(100, 100, 450, 300);
+		frmMainWindow.setBounds(100, 100, 450, 256);
 		frmMainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnSignIn = new JButton("Sign In");
@@ -110,13 +110,27 @@ public class MainWindow {
 		});
 		
 		JButton btnBrowseAuctions = new JButton("Browse Auctions");
+		btnBrowseAuctions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				BrowsePage browse = new BrowsePage();
+				browse.frmBrowseWindow.setVisible(true);
+				frmMainWindow.dispose();
+			}
+		});
 		btnBrowseAuctions.setFont(new Font("Verdana", Font.BOLD, 30));
 		
 		JButton btnMyAuctions = new JButton("My Auctions");
+		btnMyAuctions.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				//edw
+				
+			}
+		});
 		btnMyAuctions.setFont(new Font("Verdana", Font.BOLD, 30));
-		
-		JButton btnNewAuction = new JButton("New Auction");
-		btnNewAuction.setFont(new Font("Verdana", Font.BOLD, 30));
 		
 		JButton btnCp = new JButton("CP");
 		btnCp.addMouseListener(new MouseAdapter() {
@@ -141,7 +155,6 @@ public class MainWindow {
 							.addPreferredGap(ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
 							.addComponent(btnCp))
 						.addComponent(btnMyAuctions, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewAuction, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBrowseAuctions, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
 					.addContainerGap())
 		);
@@ -161,9 +174,7 @@ public class MainWindow {
 					.addComponent(btnBrowseAuctions, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnMyAuctions, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewAuction, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(21, Short.MAX_VALUE))
+					.addContainerGap(73, Short.MAX_VALUE))
 		);
 		frmMainWindow.getContentPane().setLayout(groupLayout);
 	}

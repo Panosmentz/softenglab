@@ -15,12 +15,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class SignUp {
 
 	JFrame frmSignUp;
 	private JTextField txtusr;
 	private JTextField txtpwd;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -55,7 +58,7 @@ public class SignUp {
 	private void initialize() {
 		frmSignUp = new JFrame();
 		frmSignUp.setTitle("Sign Up");
-		frmSignUp.setBounds(100, 100, 301, 185);
+		frmSignUp.setBounds(100, 100, 313, 226);
 		frmSignUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel ulbl = new JLabel("Username");
@@ -116,26 +119,40 @@ public class SignUp {
 			
 			
 		});
+		
+		btnNewButton_1 = new JButton("Back");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				MainWindow mainwindow = new MainWindow();
+				mainwindow.frmMainWindow.setVisible(true);
+				frmSignUp.dispose();
+				
+			}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(frmSignUp.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(23)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(plbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(ulbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGap(26)
-							.addComponent(btnNewButton)
-							.addGap(28))
 						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(23)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(plbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(ulbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(txtpwd, Alignment.LEADING)
-								.addComponent(txtusr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED, 6, Short.MAX_VALUE)))
-					.addGap(55))
+								.addComponent(txtusr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(98)
+							.addComponent(btnNewButton))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(116)
+							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(71, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -148,9 +165,11 @@ public class SignUp {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(plbl)
 						.addComponent(txtpwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(btnNewButton)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(20))
 		);
 		frmSignUp.getContentPane().setLayout(groupLayout);
 	}
