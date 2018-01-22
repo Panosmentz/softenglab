@@ -69,13 +69,9 @@ public class MyAuctionsPage {
 			conn = DriverManager.getConnection(connectionUrl, connectionUser,
 			connectionPassword);
 			stmt = conn.createStatement();
-			stmt.executeQuery
-			String name = txtname.getText();	
-			String type = txttype.getText();	
-			String bid = txtbid.getText();
-			String buyo = txtbuyo.getText();
-			String insert = "INSERT INTO "+type+" (Name,Bid,Buyout) VALUE ('"+name+"','"+bid+"','"+buyo+"');";
-			stmt.executeUpdate(insert);
+			
+			
+			//stmt.executeUpdate(insert);
 			
 		} catch (Exception s) {
 			s.printStackTrace();
@@ -95,7 +91,7 @@ public class MyAuctionsPage {
 			
 		}
 		JComboBox comboBox = new JComboBox();
-		comboBox.addItem();
+		//comboBox.addItem();
 		JButton btnCreateAuction = new JButton("Create Auction");
 		btnCreateAuction.addMouseListener(new MouseAdapter() {
 			@Override
