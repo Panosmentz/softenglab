@@ -13,10 +13,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JLabel;
 
 public class MainWindow {
 
 	public JFrame frmMainWindow;
+	
+	
 
 	/**
 	 * Launch the application.
@@ -24,48 +27,16 @@ public class MainWindow {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				Connection conn = null;
-				Statement stmt = null;
-				ResultSet rs = null;
+				
 				try {
 					
 					MainWindow window = new MainWindow();
 					window.frmMainWindow.setVisible(true);
 					
-					Class.forName("com.mysql.jdbc.Driver").newInstance();
-					String connectionUrl = "jdbc:mysql://localhost:3306/MyDB";
-					String connectionUser = "root";
-					String connectionPassword = "";
-					conn = DriverManager.getConnection(connectionUrl, connectionUser,
-					connectionPassword);
-					stmt = conn.createStatement();
-					rs = stmt.executeQuery("SELECT * FROM id");
 					
-					while (rs.next())
-					{
-					
-					String firstName = rs.getString("First Name");
-					String lastName = rs.getString("Last Name");
-					System.out.println("First Name: " + firstName
-					+ ", Last Name: " + lastName);
-					}
 					
 				} catch (Exception e) {
 					e.printStackTrace();
-				}finally{
-					
-					
-					try { if (rs != null) rs.close(); } catch (SQLException e) {
-					e.printStackTrace(); }
-					
-		
-					try { if (stmt != null) stmt.close(); } catch (SQLException e) {
-					e.printStackTrace(); }
-					
-					
-					try { if (conn != null) conn.close(); } catch (SQLException e) {
-					e.printStackTrace(); }
-					
 				}
 			}
 		});
@@ -82,10 +53,17 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//String x = Main.usr;
+		
+		//System.out.println(x);
 		frmMainWindow = new JFrame();
 		frmMainWindow.setTitle("Main Window");
 		frmMainWindow.setBounds(100, 100, 450, 256);
 		frmMainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		 JLabel usrname = new JLabel("New label");
+		 usrname.setText("hello "+Main.usr);
 		
 		JButton btnSignIn = new JButton("Sign In");
 		btnSignIn.addMouseListener(new MouseAdapter() {
@@ -142,6 +120,8 @@ public class MainWindow {
 			}
 			
 		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(frmMainWindow.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -152,8 +132,12 @@ public class MainWindow {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(btnSignIn, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(btnSignUp, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
-							.addComponent(btnCp))
+							.addPreferredGap(ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnCp, Alignment.TRAILING)
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(usrname)
+									.addGap(136))))
 						.addComponent(btnMyAuctions, GroupLayout.PREFERRED_SIZE, 414, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBrowseAuctions, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE))
 					.addContainerGap())
@@ -164,7 +148,9 @@ public class MainWindow {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(btnSignIn)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnSignIn)
+								.addComponent(usrname))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(btnSignUp))
 						.addGroup(groupLayout.createSequentialGroup()
@@ -174,9 +160,8 @@ public class MainWindow {
 					.addComponent(btnBrowseAuctions, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnMyAuctions, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addContainerGap(29, Short.MAX_VALUE))
 		);
 		frmMainWindow.getContentPane().setLayout(groupLayout);
 	}
-
 }
