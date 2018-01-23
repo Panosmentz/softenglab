@@ -16,14 +16,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class SignUp {
 
 	JFrame frmSignUp;
 	private JTextField txtusr;
-	private JTextField txtpwd;
 	private JButton btnNewButton_1;
+	private JPasswordField txtpwd;
 
 	/**
 	 * Launch the application.
@@ -67,9 +70,6 @@ public class SignUp {
 		
 		txtusr = new JTextField();
 		txtusr.setColumns(10);
-		
-		txtpwd = new JTextField();
-		txtpwd.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Create Account");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -132,6 +132,58 @@ public class SignUp {
 			}
 		});
 		
+		txtpwd = new JPasswordField();
+		txtpwd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					
+					Connection conn = null;
+					Statement stmt = null;
+					ResultSet rs = null;
+					try {
+						
+						
+						
+						Class.forName("com.mysql.jdbc.Driver").newInstance();
+						String connectionUrl = "jdbc:mysql://localhost:3306/MyDB";
+						String connectionUser = "root";
+						String connectionPassword = "";
+						conn = DriverManager.getConnection(connectionUrl, connectionUser,
+						connectionPassword);
+						stmt = conn.createStatement();
+						String usr = txtusr.getText();	
+						String pwd = String.valueOf(txtpwd.getPassword());				
+						String insert = "INSERT INTO Accounts (username,pass) VALUE ('"+usr+"','"+pwd+"');";
+						stmt.executeUpdate(insert);
+						frmSignUp.dispose();
+						MainWindow window = new MainWindow();
+						window.frmMainWindow.setVisible(true);
+						
+					} catch (Exception s) {
+						s.printStackTrace();
+					}finally{
+						
+						
+						try { if (rs != null) rs.close(); } catch (SQLException s) {
+						s.printStackTrace(); }
+						
+			
+						try { if (stmt != null) stmt.close(); } catch (SQLException s) {
+						s.printStackTrace(); }
+						
+						
+						try { if (conn != null) conn.close(); } catch (SQLException s) {
+						s.printStackTrace(); }
+						
+					}
+				
+					
+				}
+				}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(frmSignUp.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -143,9 +195,9 @@ public class SignUp {
 								.addComponent(plbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 								.addComponent(ulbl, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(txtpwd, Alignment.LEADING)
-								.addComponent(txtusr, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtpwd)
+								.addComponent(txtusr, GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(98)
 							.addComponent(btnNewButton))
