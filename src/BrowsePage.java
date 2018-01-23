@@ -10,6 +10,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class BrowsePage {
 
@@ -38,6 +39,27 @@ public class BrowsePage {
 	public BrowsePage() {
 		initialize();
 	}
+	
+	public static JComboBox<String> cmbwep = new JComboBox<String>();
+	public static JComboBox<String> cmbarm = new JComboBox<String>();
+	public static JComboBox<String> cmbtrin = new JComboBox<String>();
+	
+	
+	public static void addarm (String name[]) {
+		
+	cmbarm.addItem(Arrays.toString(name));
+	}
+	
+	public static void addtrin (String name[]) {
+		
+		cmbtrin.addItem(Arrays.toString(name));
+		}
+	public static void addwep (String name[]) {
+		
+		cmbwep.addItem(Arrays.toString(name));
+	}
+	
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -50,7 +72,8 @@ public class BrowsePage {
 		JButton btnbuy = new JButton("Buyout");
 		
 		JButton btnbid = new JButton("Bid");
-		
+		dbConnection db = new dbConnection();
+		db.Browse(Main.usr);
 		textField = new JTextField();
 		textField.setColumns(10);
 		
@@ -62,11 +85,9 @@ public class BrowsePage {
 		
 		JLabel lblTrinkets = new JLabel("Trinkets");
 		
-		JComboBox comboBox = new JComboBox();
 		
-		JComboBox comboBox_1 = new JComboBox();
 		
-		JComboBox comboBox_2 = new JComboBox();
+		
 		
 		JButton btnNewButton = new JButton("Back");
 		btnNewButton.addMouseListener(new MouseAdapter() {
@@ -88,7 +109,7 @@ public class BrowsePage {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(cmbwep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(84)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
@@ -98,11 +119,11 @@ public class BrowsePage {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addComponent(lblArmor)
-										.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(cmbarm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblTrinkets)
-										.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+										.addComponent(cmbtrin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
 							.addGap(18)
 							.addComponent(textField, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -121,12 +142,12 @@ public class BrowsePage {
 								.addComponent(lblTrinkets))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(cmbwep, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(cmbtrin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblArmor)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(comboBox_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(cmbarm, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED, 257, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnbuy)

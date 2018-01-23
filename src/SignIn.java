@@ -9,13 +9,16 @@ import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JPasswordField;
 
 
 public class SignIn {
 	public static String usr = null;
 	JFrame frmSignIn;
 	private JTextField txtUname;
-	private JTextField txtPwd;
+	public JPasswordField txtpwd;
 
 	/**
 	 * Launch the application.
@@ -56,9 +59,6 @@ public class SignIn {
 		txtUname = new JTextField();
 		txtUname.setColumns(10);
 		
-		txtPwd = new JTextField();
-		txtPwd.setColumns(10);
-		
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addMouseListener(new MouseAdapter() {
 			@Override
@@ -73,11 +73,12 @@ public class SignIn {
 		});
 		
 		JButton btnSignIn = new JButton("Sign In");
+		
 		btnSignIn.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				String EnteredUser = txtUname.getText();
-				String EnteredPwd = txtPwd.getText();
+				String EnteredPwd = String.valueOf(txtpwd.getPassword());
 				
 				dbConnection db = new dbConnection();
 				boolean flag = db.SignIn(EnteredUser, EnteredPwd);
@@ -98,24 +99,60 @@ public class SignIn {
 				
 			}
 		});
+		
+		txtpwd = new JPasswordField();
+		txtpwd.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				      
+					String EnteredUser = txtUname.getText();
+					String EnteredPwd = String.valueOf(txtpwd.getPassword());
+					
+					dbConnection db = new dbConnection();
+					boolean flag = db.SignIn(EnteredUser, EnteredPwd);
+					
+					if(flag == true){
+						Main.usr = EnteredUser;
+						Main.psd = EnteredPwd;
+						Main.loged = true;
+						MainWindow window = new MainWindow();
+						window.frmMainWindow.setVisible(true);
+						
+						
+						
+						frmSignIn.dispose();
+						//System.out.println("hello"+Main.usr+"!!!");
+						
+					}//end if
+					
+				   }
+				
+			}
+		});
+		
+		
 		GroupLayout groupLayout = new GroupLayout(frmSignIn.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(26)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblUsername)
 							.addGap(18)
 							.addComponent(txtUname))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtPwd, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnSignIn)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnSignUp)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblPassword, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(txtpwd, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnSignIn)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(btnSignUp)))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addContainerGap(59, Short.MAX_VALUE))
 		);
@@ -129,8 +166,8 @@ public class SignIn {
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPassword)
-						.addComponent(txtPwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+						.addComponent(txtpwd, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSignUp)
 						.addComponent(btnSignIn))
@@ -138,5 +175,4 @@ public class SignIn {
 		);
 		frmSignIn.getContentPane().setLayout(groupLayout);
 	}
-
 }

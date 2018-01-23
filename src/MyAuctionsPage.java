@@ -3,10 +3,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JLabel;
+import javax.swing.JComboBox;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+
+
+import java.awt.Button;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Arrays;
+
+import javax.swing.DefaultComboBoxModel;
 
 public class MyAuctionsPage {
 
-	private JFrame frmMyAuctions;
+	JFrame frmMAP;
 
 	/**
 	 * Launch the application.
@@ -15,8 +28,8 @@ public class MyAuctionsPage {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MyAuctionsPage window = new MyAuctionsPage();
-					window.frmMyAuctions.setVisible(true);
+					MyAuctionsPage map = new MyAuctionsPage();
+					map.frmMAP.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -30,25 +43,84 @@ public class MyAuctionsPage {
 	public MyAuctionsPage() {
 		initialize();
 	}
+	
+	public static JComboBox<String> comboBox = new JComboBox<String>();
+	public static void add (String name[]) {
+		
+		comboBox.addItem(Arrays.toString(name));
+	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmMyAuctions = new JFrame();
-		frmMyAuctions.setTitle("My Auctions");
-		frmMyAuctions.setBounds(100, 100, 450, 300);
-		frmMyAuctions.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GroupLayout groupLayout = new GroupLayout(frmMyAuctions.getContentPane());
+		
+		frmMAP = new JFrame();
+		frmMAP.setTitle("My Auctions Page");
+		frmMAP.setBounds(100, 100, 350, 332);
+		frmMAP.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		dbConnection db = new dbConnection();
+		db.MyAuctions(Main.usr);
+		System.out.println(Main.iname);
+		JLabel lblExistingAuctions = new JLabel("Existing Auctions");
+		
+		
+		
+		
+		
+		JButton btnCreateAuction = new JButton("Create Auction");
+		btnCreateAuction.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				NewAuctionPage window = new NewAuctionPage();
+				window.frmNewAuction.setVisible(true);
+				frmMAP.dispose();
+				
+			}
+		});
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MainWindow mainwindow = new MainWindow();
+				mainwindow.frmMainWindow.setVisible(true);
+				frmMAP.dispose();
+			}
+		});
+		GroupLayout groupLayout = new GroupLayout(frmMAP.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 434, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(32)
+							.addComponent(lblExistingAuctions))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(58)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(201)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnBack, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnCreateAuction, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+					.addContainerGap(294, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 262, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addComponent(lblExistingAuctions)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
+					.addComponent(btnCreateAuction)
+					.addGap(15)
+					.addComponent(btnBack)
+					.addContainerGap())
 		);
-		frmMyAuctions.getContentPane().setLayout(groupLayout);
+		frmMAP.getContentPane().setLayout(groupLayout);
 	}
-
 }
