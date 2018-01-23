@@ -53,7 +53,9 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//String x = Main.usr;
 		
+		//System.out.println(x);
 		frmMainWindow = new JFrame();
 		frmMainWindow.setTitle("Main Window");
 		frmMainWindow.setBounds(100, 100, 450, 256);
@@ -101,10 +103,8 @@ public class MainWindow {
 		btnMyAuctions.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-	
-				MyAuctionsPage map = new MyAuctionsPage();
-				map.frmMAP.setVisible(true);
-				frmMainWindow.dispose();
+				
+				//edw
 				
 			}
 		});
