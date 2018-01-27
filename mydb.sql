@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-01-23 16:39:00
+Date: 2018-01-27 20:31:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,6 +32,20 @@ INSERT INTO `accounts` VALUES ('valsas', 'peos');
 INSERT INTO `accounts` VALUES ('stelios', 'peos');
 INSERT INTO `accounts` VALUES ('panos', 'peos');
 INSERT INTO `accounts` VALUES ('vlas', '1234');
+
+-- ----------------------------
+-- Table structure for `adminaccounts`
+-- ----------------------------
+DROP TABLE IF EXISTS `adminaccounts`;
+CREATE TABLE `adminaccounts` (
+  `adName` varchar(255) NOT NULL,
+  `adPass` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of adminaccounts
+-- ----------------------------
+INSERT INTO `adminaccounts` VALUES ('admin', 'root');
 
 -- ----------------------------
 -- Table structure for `armor`
