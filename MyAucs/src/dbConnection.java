@@ -25,6 +25,7 @@ public class dbConnection {
 			}
 			String sql = "SELECT * FROM Weapons";
 			rs = stmt.executeQuery(sql);
+			
 			while(rs.next()) {
 				
 				String iname = rs.getString("Name");
@@ -35,6 +36,9 @@ public class dbConnection {
 				BrowsePage.addwep(item);
 				
 			}
+			rs.close();
+			stmt.close();
+			stmt = conn.createStatement();
 			sql = "SELECT * FROM Armor";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -47,6 +51,9 @@ public class dbConnection {
 				BrowsePage.addarm(item);
 				
 			}
+			rs.close();
+			stmt.close();
+			stmt = conn.createStatement();
 			sql = "SELECT * FROM Trinkets";
 			rs = stmt.executeQuery(sql);
 			while(rs.next()) {
@@ -59,11 +66,60 @@ public class dbConnection {
 				BrowsePage.addtrin(item);
 				
 			}
+			rs.close();
+			stmt.close();			
+			}catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	}
+	
+	public void Bid(String type,String bid,String name) {
+		
+		try{
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(connectionUrl, connectionUser,
+						connectionPassword);
+				stmt = conn.createStatement();
+			}catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+			String update = "UPDATE "+type+" SET Bid = '"+bid+"' WHERE Name ='"+name+"';";
+			
+			stmt.executeUpdate(update);		
+			stmt.close();		
 			
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		
+	}
+	
+public void Buyout(String type,String buyout,String name) {
+		
+		try{
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(connectionUrl, connectionUser,
+						connectionPassword);
+				stmt = conn.createStatement();
+			}catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+			String update = "DELETE FROM "+type+" WHERE Name = '"+name+"' ;";
+			
+			stmt.executeUpdate(update);		
+			stmt.close();		
+			
+			}catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
 	}
 	
 	public void MyAuctions(String iusr){
@@ -90,6 +146,8 @@ public class dbConnection {
 				MyAuctionsPage.add(item);
 				
 			}
+			rs.close();
+			stmt.close();
 			
 			
 			}catch (SQLException e1) {
@@ -113,6 +171,7 @@ public class dbConnection {
 			stmt.executeUpdate(sql);
 			
 			
+			stmt.close();
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -144,6 +203,8 @@ public class dbConnection {
 				return true;
 			}//end if
 		}
+		rs.close();
+		stmt.close();
 		
 		}catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -178,6 +239,8 @@ public class dbConnection {
 				
 			}//end if
 		}
+		rs.close();
+		stmt.close();
 		
 		}catch (SQLException e1) {
 			// TODO Auto-generated catch block

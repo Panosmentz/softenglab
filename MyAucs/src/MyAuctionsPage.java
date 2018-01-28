@@ -76,6 +76,7 @@ public class MyAuctionsPage {
 				
 				NewAuctionPage window = new NewAuctionPage();
 				window.frmNewAuction.setVisible(true);
+				comboBox.removeAllItems();
 				frmMAP.dispose();
 				
 			}
@@ -87,6 +88,7 @@ public class MyAuctionsPage {
 			public void mouseClicked(MouseEvent e) {
 				MainWindow mainwindow = new MainWindow();
 				mainwindow.frmMainWindow.setVisible(true);
+				comboBox.removeAllItems();
 				frmMAP.dispose();
 			}
 		});

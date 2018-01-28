@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-01-27 20:31:31
+Date: 2018-01-28 20:26:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,6 +46,7 @@ CREATE TABLE `adminaccounts` (
 -- Records of adminaccounts
 -- ----------------------------
 INSERT INTO `adminaccounts` VALUES ('admin', 'root');
+INSERT INTO `adminaccounts` VALUES ('valsasad', 'lalala12');
 
 -- ----------------------------
 -- Table structure for `armor`
@@ -63,6 +64,7 @@ CREATE TABLE `armor` (
 -- ----------------------------
 INSERT INTO `armor` VALUES ('dragonscale', '10', '1000', 'stelios');
 INSERT INTO `armor` VALUES ('brigadine', '3000', '10000', 'vlas');
+INSERT INTO `armor` VALUES ('exosuit', '1200', '10000', 'stelios');
 
 -- ----------------------------
 -- Table structure for `trinkets`
@@ -80,6 +82,7 @@ CREATE TABLE `trinkets` (
 -- ----------------------------
 INSERT INTO `trinkets` VALUES ('peos', '3', '34', 'stelios');
 INSERT INTO `trinkets` VALUES ('teeth', '1', '25', 'valsas');
+INSERT INTO `trinkets` VALUES ('locket', '2', '20', 'stelios');
 
 -- ----------------------------
 -- Table structure for `weapons`
@@ -95,7 +98,8 @@ CREATE TABLE `weapons` (
 -- ----------------------------
 -- Records of weapons
 -- ----------------------------
-INSERT INTO `weapons` VALUES ('sword', '1', '5', 'stelios');
-INSERT INTO `weapons` VALUES ('gun', '3', '7', 'valsas');
+INSERT INTO `weapons` VALUES ('sword', '5', '5', 'stelios');
 INSERT INTO `weapons` VALUES ('bow', '3', '50', 'stelios');
 INSERT INTO `weapons` VALUES ('shotgun', '3', '60', 'panos');
+INSERT INTO `weapons` VALUES ('valsa_ball', '1', '10', 'valsas');
+INSERT INTO `weapons` VALUES ('valsa ball', '1', '10', 'valsas');

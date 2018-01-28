@@ -13,5 +13,6 @@ public class Main {
 	public static String ibid="";
 	public static String ibuyo="";
 	
+	public static String selectedtype="";
 	
 }

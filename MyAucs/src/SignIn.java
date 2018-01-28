@@ -83,14 +83,14 @@ public class SignIn {
 				dbConnection db = new dbConnection();
 				boolean flag = db.SignIn(EnteredUser, EnteredPwd);
 				
+				
+				
 				if(flag == true){
 					Main.usr = EnteredUser;
 					Main.psd = EnteredPwd;
 					Main.loged = true;
 					MainWindow window = new MainWindow();
-					window.frmMainWindow.setVisible(true);
-					
-					
+					window.frmMainWindow.setVisible(true);					
 					
 					frmSignIn.dispose();
 					//System.out.println("hello"+Main.usr+"!!!");

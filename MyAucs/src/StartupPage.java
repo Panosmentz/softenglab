@@ -48,7 +48,7 @@ public class StartupPage {
 		frmStartup.setBounds(100, 100, 707, 372);
 		frmStartup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//JLabel lblNewLabel = new JLabel("Hello and Welcome to My Auctions app! \n\n Select your account type to sign in and start using our app!");
+		
 		JLabel lblNewLabel = new JLabel("<html>Hello and Welcome to My Auctions app!<br><br>Select your account type to sign in and click OK to start using our app!</html>");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Verdana", Font.ITALIC, 30));
