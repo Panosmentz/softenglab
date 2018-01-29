@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
 import java.awt.event.KeyAdapter;
@@ -57,6 +58,37 @@ public class SignIn {
 		JLabel lblPassword = new JLabel("Password :");
 		
 		txtUname = new JTextField();
+		txtUname.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+				      
+					String EnteredUser = txtUname.getText();
+					String EnteredPwd = String.valueOf(txtpwd.getPassword());
+					
+					dbConnection db = new dbConnection();
+					int flag = db.SignIn(EnteredUser, EnteredPwd);					
+					
+					if(flag == 2){
+						Main.usr = EnteredUser;
+						Main.psd = EnteredPwd;
+						Main.loged = true;
+						MainWindow window = new MainWindow();
+						window.frmMainWindow.setVisible(true);						
+						frmSignIn.dispose();
+					}else if (flag == 1) {
+						AdminWindow window = new AdminWindow();
+						window.frmAdminWindow.setVisible(true);
+						frmSignIn.dispose();					
+					}else {
+						JOptionPane.showMessageDialog(frmSignIn,"Could NOT connect.Please check your credentials!!");
+					}
+					
+				   }
+				
+			}
+		});
 		txtUname.setColumns(10);
 		
 		JButton btnSignUp = new JButton("Sign Up");
@@ -81,21 +113,24 @@ public class SignIn {
 				String EnteredPwd = String.valueOf(txtpwd.getPassword());
 				
 				dbConnection db = new dbConnection();
-				boolean flag = db.SignIn(EnteredUser, EnteredPwd);
+				int flag = db.SignIn(EnteredUser, EnteredPwd);
 				
+				System.out.println(flag);
 				
-				
-				if(flag == true){
+				if(flag == 2){
 					Main.usr = EnteredUser;
 					Main.psd = EnteredPwd;
 					Main.loged = true;
 					MainWindow window = new MainWindow();
-					window.frmMainWindow.setVisible(true);					
-					
+					window.frmMainWindow.setVisible(true);						
 					frmSignIn.dispose();
-					//System.out.println("hello"+Main.usr+"!!!");
-					
-				}//end if
+				}else if (flag == 1) {
+					AdminWindow window = new AdminWindow();
+					window.frmAdminWindow.setVisible(true);
+					frmSignIn.dispose();					
+				}else {
+					JOptionPane.showMessageDialog(frmSignIn,"Could NOT connect.Please check your credentials!!");
+				}
 				
 			}
 		});
@@ -111,21 +146,22 @@ public class SignIn {
 					String EnteredPwd = String.valueOf(txtpwd.getPassword());
 					
 					dbConnection db = new dbConnection();
-					boolean flag = db.SignIn(EnteredUser, EnteredPwd);
+					int flag = db.SignIn(EnteredUser, EnteredPwd);					
 					
-					if(flag == true){
+					if(flag == 2){
 						Main.usr = EnteredUser;
 						Main.psd = EnteredPwd;
 						Main.loged = true;
 						MainWindow window = new MainWindow();
-						window.frmMainWindow.setVisible(true);
-						
-						
-						
+						window.frmMainWindow.setVisible(true);						
 						frmSignIn.dispose();
-						//System.out.println("hello"+Main.usr+"!!!");
-						
-					}//end if
+					}else if (flag == 1) {
+						AdminWindow window = new AdminWindow();
+						window.frmAdminWindow.setVisible(true);
+						frmSignIn.dispose();					
+					}else {
+						JOptionPane.showMessageDialog(frmSignIn,"Could NOT connect.Please check your credentials!!");
+					}
 					
 				   }
 				

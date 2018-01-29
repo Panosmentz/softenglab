@@ -18,6 +18,8 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class NewAuctionPage {
 
@@ -26,6 +28,7 @@ public class NewAuctionPage {
 	private JTextField txtbid;
 	private JTextField txtbuyo;
 	private boolean flag = false;
+	private JTextField txtebid;
 
 	/**
 	 * Launch the application.
@@ -56,25 +59,36 @@ public class NewAuctionPage {
 	private void initialize() {
 		frmNewAuction = new JFrame();
 		frmNewAuction.setTitle("New Auction");
-		frmNewAuction.setBounds(100, 100, 450, 300);
+		frmNewAuction.setBounds(100, 100, 343, 300);
 		frmNewAuction.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblSetType = new JLabel("Set Item Type:");
+		lblSetType.setBounds(40, 47, 109, 14);
 		
 		JLabel lblSetItemName = new JLabel("Set Item Name:");
+		lblSetItemName.setBounds(40, 72, 109, 14);
 		
 		txtname = new JTextField();
+		txtname.setBounds(159, 69, 158, 20);
 		txtname.setColumns(10);
 		
 		JLabel lblSetItemPrice = new JLabel("Set starting bid:");
+		lblSetItemPrice.setBounds(40, 97, 115, 14);
 		
 		txtbid = new JTextField();
+		txtbid.setBounds(159, 94, 158, 20);
 		txtbid.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(159, 44, 158, 20);
 		
 		
 		JButton btnCreate = new JButton("Create");
+		btnCreate.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCreate.setBounds(141, 226, 83, 23);
 		btnCreate.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -84,10 +98,11 @@ public class NewAuctionPage {
 				String name = txtname.getText();
 				String bid = txtbid.getText();
 				String buyo= txtbuyo.getText();
+				String ebid= txtebid.getText();
 				String usr = Main.usr;
 				String type = (String) comboBox.getSelectedItem();
 				
-				db.NewAuction(type, name, bid, buyo, usr);
+				db.NewAuction(type, name, bid, buyo, usr,ebid);
 				MyAuctionsPage map = new MyAuctionsPage();
 				map.frmMAP.setVisible(true);
 				frmNewAuction.dispose();				
@@ -95,6 +110,7 @@ public class NewAuctionPage {
 		});
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(234, 226, 83, 23);
 		btnBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -105,67 +121,33 @@ public class NewAuctionPage {
 		});
 		
 		JLabel lblSetBuyoutPrice = new JLabel("Set buyout price:");
+		lblSetBuyoutPrice.setBounds(40, 147, 115, 14);
 		
 		txtbuyo = new JTextField();
+		txtbuyo.setBounds(159, 144, 158, 20);
 		txtbuyo.setColumns(10);
 		
 		
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Weapons", "Armor", "Trinkets"}));
-		GroupLayout groupLayout = new GroupLayout(frmNewAuction.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(321, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnBack, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCreate))
-					.addGap(48))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSetBuyoutPrice, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtbuyo, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-									.addComponent(lblSetType, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblSetItemName, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-								.addComponent(lblSetItemPrice, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(comboBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(txtbid, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-								.addComponent(txtname, GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))))
-					.addContainerGap(155, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(31)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSetType)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSetItemName)
-						.addComponent(txtname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblSetItemPrice)
-						.addComponent(txtbid, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSetBuyoutPrice)
-							.addGap(10)
-							.addComponent(btnCreate)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnBack))
-						.addComponent(txtbuyo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(34, Short.MAX_VALUE))
-		);
-		frmNewAuction.getContentPane().setLayout(groupLayout);
+		frmNewAuction.getContentPane().setLayout(null);
+		frmNewAuction.getContentPane().add(btnBack);
+		frmNewAuction.getContentPane().add(btnCreate);
+		frmNewAuction.getContentPane().add(lblSetBuyoutPrice);
+		frmNewAuction.getContentPane().add(txtbuyo);
+		frmNewAuction.getContentPane().add(lblSetType);
+		frmNewAuction.getContentPane().add(lblSetItemName);
+		frmNewAuction.getContentPane().add(lblSetItemPrice);
+		frmNewAuction.getContentPane().add(comboBox);
+		frmNewAuction.getContentPane().add(txtbid);
+		frmNewAuction.getContentPane().add(txtname);
+		
+		JLabel lblSetEndBid = new JLabel("Set end bid:");
+		lblSetEndBid.setBounds(40, 122, 115, 14);
+		frmNewAuction.getContentPane().add(lblSetEndBid);
+		
+		txtebid = new JTextField();
+		txtebid.setColumns(10);
+		txtebid.setBounds(159, 119, 158, 20);
+		frmNewAuction.getContentPane().add(txtebid);
 	}
 }

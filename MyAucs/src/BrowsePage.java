@@ -45,26 +45,23 @@ public class BrowsePage {
 	 * Create the application.
 	 */
 	public BrowsePage() {
+		
 		initialize();
 	}
 	
 	public static JComboBox<String> cmbwep = new JComboBox<String>();
 	public static JComboBox<String> cmbarm = new JComboBox<String>();
 	public static JComboBox<String> cmbtrin = new JComboBox<String>();
-	private JTextField buyop;
 	
 	
-	public static void addarm (String name[]) {
-		
+	public static void addarm (String name[]) {		
 	cmbarm.addItem(Arrays.toString(name));
 	}
 	
-	public static void addtrin (String name[]) {
-		
+	public static void addtrin (String name[]) {		
 		cmbtrin.addItem(Arrays.toString(name));
 		}
-	public static void addwep (String name[]) {
-		
+	public static void addwep (String name[]) {		
 		cmbwep.addItem(Arrays.toString(name));
 	}
 	
@@ -76,32 +73,33 @@ public class BrowsePage {
 	JTextPane txtbuyo = new JTextPane();
 	JTextPane txtbid = new JTextPane();
 	JTextPane txtname = new JTextPane();
+	JTextPane txtWal = new JTextPane();	
+	
 	private void initialize() {
 		frmBrowseWindow = new JFrame();
+		frmBrowseWindow.setTitle("Browse Page");
 		frmBrowseWindow.setBounds(100, 100, 629, 467);
 		frmBrowseWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		dbConnection db = new dbConnection();
+		db.Browse(Main.usr);
+		txtWal.setText(Float.toString(Main.wal));
 		JButton btnbuy = new JButton("Buyout");
 		btnbuy.setBounds(410, 323, 81, 29);
 		btnbuy.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				
 				dbConnection db = new dbConnection();
-				db.Buyout(Main.selectedtype,buyop.getText(),txtname.getText());
+				db.Buyout(Main.selectedtype,txtbuyo.getText(),txtname.getText());
 				
 			}
 		});
 		
 		
-		dbConnection db = new dbConnection();
-		db.Browse(Main.usr);
+		
 		bidp = new JTextField();
 		bidp.setBounds(506, 278, 62, 26);
 		bidp.setColumns(10);
-		
-		JLabel lblbtc = new JLabel("BTC");
-		lblbtc.setBounds(574, 329, 29, 20);
 		
 		JLabel lblNewLabel = new JLabel("Weapons");
 		lblNewLabel.setBounds(49, 29, 112, 20);
@@ -115,32 +113,29 @@ public class BrowsePage {
 		JLabel label = new JLabel("BTC");
 		label.setBounds(574, 281, 29, 20);
 		
-		buyop = new JTextField();
-		buyop.setBounds(506, 326, 62, 26);
-		buyop.setColumns(10);
 		
-		JButton btnBack = new JButton("BACK");
-		btnBack.setBounds(410, 370, 81, 29);
-		btnBack.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				MainWindow window = new MainWindow();
-				window.frmMainWindow.setVisible(true);
-				cmbarm.removeAllItems();
-				cmbwep.removeAllItems();
-				cmbtrin.removeAllItems();
-				frmBrowseWindow.dispose();
-				
-			}
-		});
 		frmBrowseWindow.getContentPane().setLayout(null);
 		frmBrowseWindow.getContentPane().add(lblArmor);
 		frmBrowseWindow.getContentPane().add(lblTrinkets);
 		frmBrowseWindow.getContentPane().add(lblNewLabel);
+		JButton btnBack = new JButton("BACK");
+		btnBack.setBounds(410, 370, 81, 29);
+		btnBack.addMouseListener(new MouseAdapter() {			
+			@Override			
+			public void mouseClicked(MouseEvent e) {
+				
+				MainWindow window = new MainWindow();
+				window.frmMainWindow.setVisible(true);	
+				cmbwep.removeAllItems();
+				cmbarm.removeAllItems();				
+				cmbtrin.removeAllItems();
+				frmBrowseWindow.dispose();							
+			}
+		});
+		
 		cmbwep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if (cmbwep.getSelectedItem() != null ) {
 				String selectedwep = (String) cmbwep.getSelectedItem();
 				Main.selectedtype="Weapons";
 				String name = selectedwep.split(",")[0];
@@ -149,14 +144,14 @@ public class BrowsePage {
 				txtbid.setText(bid.substring(1));
 				String buyo = selectedwep.split(",")[2];				
 				txtbuyo.setText(buyo.substring(1,buyo.length() - 1));
-				
+				}
 			}
 		});
 		cmbwep.setBounds(148, 26, 425, 26);
 		frmBrowseWindow.getContentPane().add(cmbwep);
 		cmbtrin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if (cmbtrin.getSelectedItem() != null ) {
 				String selectedtrink = (String) cmbtrin.getSelectedItem();
 				Main.selectedtype="Trinkets";
 				String name = selectedtrink.split(",")[0];
@@ -165,14 +160,14 @@ public class BrowsePage {
 				txtbid.setText(bid.substring(1));
 				String buyo = selectedtrink.split(",")[2];				
 				txtbuyo.setText(buyo.substring(1,buyo.length() - 1));
-				
+				}
 			}
 		});
 		cmbtrin.setBounds(148, 139, 425, 26);
 		frmBrowseWindow.getContentPane().add(cmbtrin);
 		cmbarm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if (cmbarm.getSelectedItem() != null ) {
 				String selectedarm = (String) cmbarm.getSelectedItem();
 				Main.selectedtype="Armor";
 				String name = selectedarm.split(",")[0];
@@ -181,7 +176,7 @@ public class BrowsePage {
 				txtbid.setText(bid.substring(1));
 				String buyo = selectedarm.split(",")[2];				
 				txtbuyo.setText(buyo.substring(1,buyo.length() - 1));
-				
+				}
 			}
 		});
 		
@@ -191,9 +186,11 @@ public class BrowsePage {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				
+				if(cmbwep.getSelectedItem() != null || cmbarm.getSelectedItem() != null || cmbtrin.getSelectedItem() != null ) {
 				dbConnection db = new dbConnection();
 				db.Bid(Main.selectedtype,bidp.getText(),txtname.getText());
 				
+				}
 			}
 		});
 		
@@ -204,8 +201,6 @@ public class BrowsePage {
 		frmBrowseWindow.getContentPane().add(btnbuy);
 		frmBrowseWindow.getContentPane().add(bidp);
 		frmBrowseWindow.getContentPane().add(label);
-		frmBrowseWindow.getContentPane().add(buyop);
-		frmBrowseWindow.getContentPane().add(lblbtc);
 		
 		JLabel lblSelectedItem = new JLabel("SELECTED ITEM");
 		lblSelectedItem.setHorizontalAlignment(SwingConstants.LEFT);
@@ -239,5 +234,24 @@ public class BrowsePage {
 		txtname.setEditable(false);
 		txtname.setBounds(49, 308, 151, 20);
 		frmBrowseWindow.getContentPane().add(txtname);
+		
+		JLabel lblNewLabel_1 = new JLabel("WALLET :");
+		lblNewLabel_1.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblNewLabel_1.setBounds(410, 218, 75, 20);
+		frmBrowseWindow.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblBtc = new JLabel("BTC");
+		lblBtc.setFont(new Font("Verdana", Font.PLAIN, 14));
+		lblBtc.setBounds(566, 218, 37, 20);
+		frmBrowseWindow.getContentPane().add(lblBtc);
+		
+		
+		
+		
+		
+		txtWal.setEditable(false);
+		txtWal.setBounds(482, 219, 81, 20);
+		frmBrowseWindow.getContentPane().add(txtWal);
+		
 	}
 }
