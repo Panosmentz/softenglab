@@ -66,10 +66,10 @@ public class SignUp {
 		frmSignUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel ulbl = new JLabel("Username");
-		ulbl.setBounds(23, 33, 48, 14);
+		ulbl.setBounds(10, 33, 67, 14);
 		
 		JLabel plbl = new JLabel("Password");
-		plbl.setBounds(23, 83, 48, 14);
+		plbl.setBounds(10, 83, 67, 14);
 		
 		txtusr = new JTextField();
 		txtusr.setBounds(81, 30, 145, 20);
@@ -95,7 +95,7 @@ public class SignUp {
 		txtusr.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Create Account");
-		btnNewButton.setBounds(98, 111, 107, 23);
+		btnNewButton.setBounds(91, 111, 129, 23);
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -117,7 +117,7 @@ public class SignUp {
 		});
 		
 		btnNewButton_1 = new JButton("Back");
-		btnNewButton_1.setBounds(98, 145, 107, 23);
+		btnNewButton_1.setBounds(91, 145, 129, 23);
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {

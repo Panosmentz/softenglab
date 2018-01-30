@@ -10,7 +10,9 @@ public class dbConnection {
 	String connectionPassword = "";
 	Connection conn = null;
 	Statement stmt = null;
+	Statement stmt1 = null;
 	ResultSet rs = null;
+	
 	public void AdminBrowse(String iusr){
 		try{
 			try{
@@ -161,15 +163,24 @@ public class dbConnection {
 				
 				e.printStackTrace();
 			}
-			String update = "UPDATE Products "+type+" SET Bid = '"+bid+"' WHERE Name ='"+name+"' AND Type = '"+type+"';";
-			
+			String update = "UPDATE Products SET Bid = '"+bid+"' WHERE Name ='"+name+"' AND Type = '"+type+"';";
 			stmt.executeUpdate(update);		
 			float newBalance= Main.wal- Float.parseFloat(bid);
 			
-			update = "UPDATE accounts SET balance = '"+newBalance+"' WHERE username ='"+Main.usr+"' ;";
-			stmt.executeUpdate(update);	
-			//stmt.close();		
 			
+			
+			update = "UPDATE accounts SET balance = '"+newBalance+"' WHERE username ='"+Main.usr+"' ;";
+			stmt.executeUpdate(update);			
+			
+			String sql = "SELECT * FROM Products WHERE Name ='"+name+"' AND Type = '"+type+"'";
+			rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				if (Float.parseFloat(bid) >= rs.getFloat("EndBid")) {
+					stmt1 = conn.createStatement();
+					String del = "DELETE FROM Products  WHERE Name = '"+name+"' AND Type = '"+type+"'";
+					stmt1.executeUpdate(del);			
+				}
+			}					
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -188,10 +199,12 @@ public class dbConnection {
 			}catch (ClassNotFoundException e) {
 				
 				e.printStackTrace();
-			}			
-			String update = "DELETE FROM Products "+type+" WHERE Name = '"+name+"' AND Type = '"+type+"';";			
+			}		
+			
+			String update = "DELETE FROM Products WHERE Name = '"+name+"' AND Type = '"+type+"';";			
 			stmt.executeUpdate(update);		
-			stmt.close();		
+			stmt.close();				
+				
 			
 			}catch (SQLException e1) {
 				// TODO Auto-generated catch block
@@ -313,19 +326,23 @@ public class dbConnection {
 				e.printStackTrace();
 			}
 			
+			
 		String sql = ("SELECT * FROM accounts");
 		rs = stmt.executeQuery(sql);
 		while(rs.next()) {
 			
 			String user = rs.getString("username");
 			String pwd = rs.getString("pass");
+			Main.wal = rs.getFloat("balance");
 			int flag = rs.getInt("adflg");
 
-			if(pwd.equals(Passwd) && user.equals(uName) && flag==1) {
+			if(pwd.equals(Passwd) && user.equals(uName) && flag==1) 
+			{
 				
 				return 1;
 				
-			}else if (pwd.equals(Passwd) && user.equals(uName) && flag==0) {
+			}else if (pwd.equals(Passwd) && user.equals(uName) && flag==0) 
+			{
 				
 				return 2;
 				
@@ -376,6 +393,33 @@ public class dbConnection {
 			s.printStackTrace();
 		}
 		return 0;
+	}
+	
+	public void Wallet() {
+		
+		try{
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+				conn = DriverManager.getConnection(connectionUrl, connectionUser,
+						connectionPassword);
+				stmt = conn.createStatement();
+			}catch (ClassNotFoundException e) {
+				
+				e.printStackTrace();
+			}
+			
+			String sql = "SELECT * FROM accounts WHERE username = '"+Main.usr+"'";
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				Main.wal = rs.getFloat("balance");
+			}
+			rs.close();
+			stmt.close();		
+			}catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
 	}
 	
 }

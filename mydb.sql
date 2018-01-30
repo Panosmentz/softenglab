@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2018-01-29 23:55:54
+Date: 2018-01-30 18:34:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,12 +29,10 @@ CREATE TABLE `accounts` (
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
-INSERT INTO `accounts` VALUES ('stelios', 'peos', '1000', '0');
-INSERT INTO `accounts` VALUES ('panos', 'peos', '641', '0');
-INSERT INTO `accounts` VALUES ('vlas', '1234', '1000', '0');
 INSERT INTO `accounts` VALUES ('admin', 'root', '0', '1');
-INSERT INTO `accounts` VALUES ('lol', 'lol', '1000', '0');
-INSERT INTO `accounts` VALUES ('valsas', 'peos', '1000', '0');
+INSERT INTO `accounts` VALUES ('stelios', 'stelios', '700', '0');
+INSERT INTO `accounts` VALUES ('valsas', 'valsas', '1000', '0');
+INSERT INTO `accounts` VALUES ('panos', 'panos', '1000', '0');
 
 -- ----------------------------
 -- Table structure for `products`
@@ -52,6 +50,8 @@ CREATE TABLE `products` (
 -- ----------------------------
 -- Records of products
 -- ----------------------------
-INSERT INTO `products` VALUES ('sword', '19', '100', 'stelios', '10', 'Weapons');
-INSERT INTO `products` VALUES ('teeth', '3', '300', 'stelios', '30', 'Trinkets');
-INSERT INTO `products` VALUES ('o poutsos mou', '100', '100', 'valsas', '50', 'Weapons');
+INSERT INTO `products` VALUES ('breastplate', '50', '500', 'valsas', '100', 'Armor');
+INSERT INTO `products` VALUES ('necklace', '3', '100', 'panos', '30', 'Trinkets');
+INSERT INTO `products` VALUES ('sword', '1', '100', 'stelios', '10', 'Weapons');
+INSERT INTO `products` VALUES ('brigadine', '100', '750', 'valsas', '550', 'Armor');
+INSERT INTO `products` VALUES ('Family Heirloom', '55', '500', 'stelios', '200', 'Trinkets');

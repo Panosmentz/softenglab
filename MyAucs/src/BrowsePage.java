@@ -6,6 +6,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
@@ -83,15 +84,18 @@ public class BrowsePage {
 		dbConnection db = new dbConnection();
 		db.Browse(Main.usr);
 		txtWal.setText(Float.toString(Main.wal));
+		
 		JButton btnbuy = new JButton("Buyout");
 		btnbuy.setBounds(410, 323, 81, 29);
 		btnbuy.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				if (Float.parseFloat(txtbuyo.getText()) <= Main.wal) {	
 				dbConnection db = new dbConnection();
 				db.Buyout(Main.selectedtype,txtbuyo.getText(),txtname.getText());
-				
+				}else {
+					JOptionPane.showMessageDialog(frmBrowseWindow,"Not enough Bitcoin!!!");
+				}
 			}
 		});
 		
@@ -187,8 +191,12 @@ public class BrowsePage {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				if(cmbwep.getSelectedItem() != null || cmbarm.getSelectedItem() != null || cmbtrin.getSelectedItem() != null ) {
-				dbConnection db = new dbConnection();
-				db.Bid(Main.selectedtype,bidp.getText(),txtname.getText());
+					if (Float.parseFloat(bidp.getText()) <= Main.wal) {					
+						dbConnection db = new dbConnection();
+						db.Bid(Main.selectedtype,bidp.getText(),txtname.getText());
+					}else {
+						JOptionPane.showMessageDialog(frmBrowseWindow,"Not enough Bitcoin!!!");
+					}
 				
 				}
 			}

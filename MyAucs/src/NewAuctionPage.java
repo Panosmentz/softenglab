@@ -84,10 +84,7 @@ public class NewAuctionPage {
 		
 		
 		JButton btnCreate = new JButton("Create");
-		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		
 		btnCreate.setBounds(141, 226, 83, 23);
 		btnCreate.addMouseListener(new MouseAdapter() {
 			@Override
@@ -105,6 +102,7 @@ public class NewAuctionPage {
 				db.NewAuction(type, name, bid, buyo, usr,ebid);
 				MyAuctionsPage map = new MyAuctionsPage();
 				map.frmMAP.setVisible(true);
+				comboBox.removeAllItems();
 				frmNewAuction.dispose();				
 			}
 		});
@@ -116,6 +114,7 @@ public class NewAuctionPage {
 			public void mouseClicked(MouseEvent e) {
 				MyAuctionsPage map = new MyAuctionsPage();
 				map.frmMAP.setVisible(true);
+				comboBox.removeAllItems();
 				frmNewAuction.dispose();
 			}
 		});

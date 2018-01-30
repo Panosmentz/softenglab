@@ -2,7 +2,7 @@
 public class Main {
 
 	public static String usr="";
-	public static float wal=0;
+	public static float wal;
 	public static String psd="";
 	public static boolean loged= false;
 	

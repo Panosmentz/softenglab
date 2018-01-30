@@ -74,6 +74,7 @@ public class SignIn {
 						Main.usr = EnteredUser;
 						Main.psd = EnteredPwd;
 						Main.loged = true;
+						
 						MainWindow window = new MainWindow();
 						window.frmMainWindow.setVisible(true);						
 						frmSignIn.dispose();
