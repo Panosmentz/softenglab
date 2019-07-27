@@ -1,10 +1,10 @@
-﻿Για την σύνδεση στο σύστημα ακολουθήστε τα παρακάτω βήματα :
-1) Ανοίγουμε μια πλατφόρμα MySQL(πχ. Navicat) και το XAMPP και ξεκινάμε την MySQL
-2) Κάνουμε import το αρχείο mydb.sql στο Navicat
-3) Ανοίγουμε Eclipse και βάζουμε στο directory το σωστό path του MyAuctions
-4) Τρέχουμε απο τον φάκελο src το Sign In.java 
+To connect use the following steps : 
+1)Open a MySQL platform(Navicat) and XAMPP and start MySQL
+2)Import mydb.sql @ Navicat
+3)Open Eclipse and use the right path of MyAuctions @ the directory
+4)Run Sign In.java found in the src folder
 
-Είσοδος με δικαιώματα administrator : 
-Για λόγους ασφαλείας επιλέξαμε να μήν δίνεται η δυνατότητα δημιουργίας νέου λογαριασμού
-με δικαιώματα administrator. Τα admin accounts μπορούν να φτιαχτούν μόνο απο την ΒΔ.
-Επιλέξαμε να έχουμε έναν λογαριασμό admin με username: admin και password:root
+
+In order to connect with administrator rights : 
+For security reasons, admin accounts have to be created through the database.
+Admin account --> username: admin , password: root
