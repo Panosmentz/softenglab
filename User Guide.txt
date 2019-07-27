@@ -1,15 +1,15 @@
-﻿Για την σύνδεση στο σύστημα ακολουθήστε τα παρακάτω βήματα :
-1) Ανοίγουμε μια πλατφόρμα MySQL(πχ. Navicat) και το XAMPP και ξεκινάμε την MySQL
-2) Κάνουμε import το αρχείο mydb.sql στο Navicat
-3) Ανοίγουμε Eclipse και βάζουμε στο directory το σωστό path του MyAuctions
-4) Τρέχουμε απο τον φάκελο src το Sign In.java 
+To connect use the following steps : 
+1)Open a MySQL platform(Navicat) and XAMPP and start MySQL
+2)Import mydb.sql @ Navicat
+3)Open Eclipse and use the right path of MyAuctions @ the directory
+4)Run Sign In.java found in the src folder
 
-Για εγγεγραμένους χρήστες : 
-1) Πληκτρολογείστε τα στοιχεία σας και πιέστε enter ή κλίκ στο Sign In
-2) Περιηγηθείτε στο περιβάλλον του συστήματος
+Already a user? 
+1) Type your credentials and Sign in
+2) Browse
 
-Για νέους χρήστες : 
-1) Επιλέξτε το Sign Up
-2) Πληκτρολογείστε τα επιθυμητά credentials σας
-3) Εισέλθετε στο σύστημα
-4) Περιηγηθείτε στο περιβάλλον του συστήματος 
+New user?
+1) Press Sign Up
+2) Type your credentials
+3) Log in
+4) Browse
